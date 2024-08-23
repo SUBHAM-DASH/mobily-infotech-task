@@ -11,6 +11,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
 import { taskValidationSchema } from "../validations/validationSchema";
 import EventNoteIcon from "@mui/icons-material/EventNote";
+import API_URLS from "../config/apiUrls";
+import { toast } from "react-toastify";
+import API from "../axiosInstance";
 
 const defaultTheme = createTheme();
 
@@ -19,13 +22,22 @@ const TasksPage = () => {
     initialValues: {
       title: "",
       description: "",
-      dueDate: null,
+      dueDate: "",
     },
     validationSchema: taskValidationSchema,
     validateOnMount: true,
-    onSubmit: (values) => {
+    onSubmit: async (values,{ resetForm }) => {
       // Handle form submission
-      console.log(values);
+      try {
+        await API.post(`${API_URLS.TASKS}`, values);
+        toast.success("Task Added.");
+        resetForm();
+      } catch (error) {
+        toast.error(
+          error?.response?.data?.message ||
+            "Something Went Wrong. Please Try Again."
+        );
+      }
     },
   });
 

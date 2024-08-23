@@ -5,8 +5,7 @@ const API_URLS = {
   // Authentication endpoints
   REGISTER: "/api/register",
   LOGIN: "/api/login",
-
-
+  TASKS: "/api/tasks",
 };
 
 export default API_URLS;

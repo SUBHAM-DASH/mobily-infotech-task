@@ -55,7 +55,7 @@ const RegisterPage = () => {
         navigate("/login");
       } catch (error) {
         toast.error(
-          error?.response?.data?.message || "Login failed. Please try again."
+          error?.response?.data?.message || "Sign Up failed. Please try again."
         );
       }
     },

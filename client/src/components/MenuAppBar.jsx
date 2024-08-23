@@ -76,49 +76,61 @@ export default function MenuAppBar() {
               <MenuIcon />
             </IconButton>
           )}
-          {!isMobile && (
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Mobily Infotech Task
-            </Typography>
-          )}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              justifyContent: isMobile ? "center" : "flex-start",
+              alignItems: "center",
+            }}
+          >
+            {!isMobile && (
+              <Typography variant="h6" component="div">
+                Mobily Infotech Task
+              </Typography>
+            )}
+            {isMobile && (
+              <Typography variant="h6" component="div">
+                Mobily Infotech Task
+              </Typography>
+            )}
+          </Box>
           {auth && !isMobile && (
-            <div>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    handleLogout();
-                  }}
-                >
-                  Logout
-                </MenuItem>
-              </Menu>
-            </div>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
           )}
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                handleLogout();
+              }}
+            >
+              Logout
+            </MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
       <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerToggle}>
